@@ -34,4 +34,11 @@ app.controller('MainController', function($scope){
   $scope.sort = function (sorted){
     $scope.vm.sort = sorted;
   }
+  $scope.up = function(post) {
+    $scope.data[post].votes++
+  }
+  $scope.down = function (post) {
+    $scope.data[post].votes--
+  }
+
 });

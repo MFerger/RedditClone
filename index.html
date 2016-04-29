@@ -60,10 +60,9 @@
       <img ng-src={{item.image}}></img>
     </div>
     <div class="posts">
-
       <p><h3>votes: {{item.votes}}</h3>
-      <span ng-click='up' class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-      <span ng-click='down' class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></p>
+      <span ng-click='up($index)' class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+      <span ng-click='down($index)' class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></p>
 
       <h3>{{item.title}}</h3>
       <h3>{{item.description}}</h3>
