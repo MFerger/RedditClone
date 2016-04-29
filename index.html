@@ -32,15 +32,13 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="#">Submit Post</a></li>
+          <li><a data-toggle="modal" data-target="#myModal" id='submitButton'>+Submit New Post</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By: <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li ng-click="sort('-votes')"><a href="#">Votes</a></li>
               <li ng-click="sort('date')"><a href="#">Date</a></li>
               <li ng-click="sort('title')"><a href="#">Title</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">One more separated link</a></li>
             </ul>
           </li>
         </ul>
@@ -53,6 +51,46 @@
     </div>
   </nav>
 
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button-primary" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Create a posting</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <fieldset class="form-group">
+            <label>Title</label>
+            <input type="text" class="form-control">
+            <small class="text-muted">Enter the title of your posting.</small>
+            </fieldset>
+            <fieldset class="form-group">
+            <label>Description</label>
+            <input type="text" class="form-control">
+            <small class="text-muted">Enter the description of the posting.</small>
+            </fieldset>
+            <fieldset class="form-group">
+            <label>Image URL</label>
+            <input type="text" class="form-control">
+            <small class="text-muted">Enter the URL of the image for the posting.</small>
+            </fieldset>
+            <fieldset class="form-group">
+            <label>Author</label>
+            <input type="text" class="form-control">
+            <small class="text-muted">Author of the posting.</small>
+            </fieldset>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn modalButton" data-dismiss="modal">Close</button>
+          <button type="button" class="btn modalButton">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <section ng-repeat='item in data| filter: search | orderBy: vm.sort'>
   <article class='posts'>
     <div class="container-fluid">
@@ -61,8 +99,8 @@
     </div>
     <div class="posts">
       <p><h3>votes: {{item.votes}}</h3>
-      <span ng-click='up($index)' class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-      <span ng-click='down($index)' class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></p>
+      <span ng-click='up(item)' class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+      <span ng-click='down(item)' class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></p>
 
       <h3>{{item.title}}</h3>
       <h3>{{item.description}}</h3>
