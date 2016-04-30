@@ -12,6 +12,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
   <script src="app.js" charset="utf-8"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.js" charset="utf-8"></script>
   <link rel="stylesheet" href="style.css">
   <title>Faux-Reddit</title>
 </head>
@@ -37,7 +38,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By: <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li ng-click="sort('-votes')"><a href="#">Votes</a></li>
-              <li ng-click="sort('date')"><a href="#">Date</a></li>
+              <li ng-click="sort('-date')"><a href="#">Newest Date</a></li>
               <li ng-click="sort('title')"><a href="#">Title</a></li>
             </ul>
           </li>
@@ -60,55 +61,89 @@
           <h4 class="modal-title" id="myModalLabel">Create a posting</h4>
         </div>
         <div class="modal-body">
-          <form>
+          <form ng-submit="addPost(newPost)" name='modalForm'>
             <fieldset class="form-group">
             <label>Title</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" ng-model='newPost.title' name='inputTitle' minlength='5'>
             <small class="text-muted">Enter the title of your posting.</small>
+            <div ng-messages='modalForm.inputTitle.$error'>
+              <div ng-message='minlength'>Title must be at least 5 characters long.</div>
+            </div>
             </fieldset>
             <fieldset class="form-group">
             <label>Description</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" ng-model='newPost.description' name='inputDescription' minlength='5'>
             <small class="text-muted">Enter the description of the posting.</small>
+            <div ng-messages='modalForm.inputDescription.$error'>
+              <div ng-message='minlength'>Description must be at least 5 characters long.</div>
+            </div>
             </fieldset>
             <fieldset class="form-group">
             <label>Image URL</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" ng-model='newPost.url' name='inputUrl' minlength='5'>
             <small class="text-muted">Enter the URL of the image for the posting.</small>
+            <div ng-messages='modalForm.inputUrl.$error'>
+              <div ng-message='minlength'>Url must be at least 5 characters long.</div>
+            </div>
             </fieldset>
             <fieldset class="form-group">
             <label>Author</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" ng-model='newPost.author' name='inputAuthor' minlength='5'>
             <small class="text-muted">Author of the posting.</small>
+            <div ng-messages='modalForm.inputAuthor.$error'>
+              <div ng-message='minlength'>author must be at least 5 characters long.</div>
+            </div>
             </fieldset>
-          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn modalButton" data-dismiss="modal">Close</button>
-          <button type="button" class="btn modalButton">Save changes</button>
+          <button type="submit" class="btn modalButton" data-toggle="modal" data-target="#myModal">Save changes</button>
         </div>
+      </form>
       </div>
     </div>
   </div>
 
 <section ng-repeat='item in data| filter: search | orderBy: vm.sort'>
-  <article class='posts'>
-    <div class="container-fluid">
+  <article class='posts post'>
+    <div class="row">
     <div class='image'>
-      <img ng-src={{item.image}}></img>
+      <img class='post' ng-src={{item.image}}></img>
     </div>
     <div class="posts">
-      <p><h3>votes: {{item.votes}}</h3>
+      <h3>Votes: <span ng-class='{positive: item.votes > 0, negative: item.votes < 0}'>{{item.votes}} | </span>
       <span ng-click='up(item)' class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-      <span ng-click='down(item)' class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></p>
+      <span ng-click='down(item)' class="glyphicon glyphicon-arrow-down"  aria-hidden="true"></span></h3>
 
       <h3>{{item.title}}</h3>
       <h3>{{item.description}}</h3>
-      <h3>{{item.author}}</h3>
-      <h3>{{item.date | date :'fullDate'}}</h3>
-      <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+      <h3 class='author'>{{item.author}}</h3>
+
+      <p><timeless time='item.date'></timeless></p>
+
       <h3>Comments: {{item.comments.length}}</h3>
-      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+      <span class="glyphicon glyphicon-comment" aria-hidden="true" ng-click='showComments(item)'></span>
+      <span ng-repeat="comment in item.comments">
+      <h3 ng-show="item.showComment">Author: {{comment.author}}</h3>
+      <h3 ng-show="item.showComment">Comment: {{comment.text}}</h3>
+      </span>
+
+
+      <span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click='newComment(item)'></span>
+        <div class="comment" ng-show="item.newCommentVisible">
+          <form class="form-inline" ng-submit="addComment(item, newComment)">
+            <div class="form-group">
+              <label>Author</label>
+              <input type="text" placeholder="author" class="form-control" ng-model="newComment.author">
+            </div>
+            <div class="form-group">
+              <label>Text</label>
+              <input type="text" placeholder="text" class="form-control" ng-model="newComment.text">
+            </div>
+            <input class="btn btn-success" type="submit" value="Add Comment">
+          </form>
+        </div>
+
     </div>
 </div>
   </article>
