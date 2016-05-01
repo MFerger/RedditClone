@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" ng-app='form'>
+
 <head>
   <meta charset="UTF-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
@@ -14,8 +15,9 @@
   <script src="app.js" charset="utf-8"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.js" charset="utf-8"></script>
   <link rel="stylesheet" href="style.css">
-  <title>Faux-Reddit</title>
+  <title>Reddit 2.0</title>
 </head>
+
 <body ng-controller='MainController'>
   <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -63,91 +65,102 @@
         <div class="modal-body">
           <form ng-submit="addPost(newPost)" name='modalForm'>
             <fieldset class="form-group">
-            <label>Title</label>
-            <input type="text" class="form-control" ng-model='newPost.title' name='inputTitle' minlength='5'>
-            <small class="text-muted">Enter the title of your posting.</small>
-            <div ng-messages='modalForm.inputTitle.$error'>
-              <div ng-message='minlength'>Title must be at least 5 characters long.</div>
-            </div>
+              <label>Title</label>
+              <input type="text" class="form-control" ng-model='newPost.title' name='inputTitle' minlength='5'>
+              <small class="text-muted">Enter the title of your posting.</small>
+              <div ng-messages='modalForm.inputTitle.$error'>
+                <div ng-message='minlength'>Title must be at least 5 characters long.</div>
+              </div>
             </fieldset>
             <fieldset class="form-group">
-            <label>Description</label>
-            <input type="text" class="form-control" ng-model='newPost.description' name='inputDescription' minlength='5'>
-            <small class="text-muted">Enter the description of the posting.</small>
-            <div ng-messages='modalForm.inputDescription.$error'>
-              <div ng-message='minlength'>Description must be at least 5 characters long.</div>
-            </div>
+              <label>Description</label>
+              <input type="text" class="form-control" ng-model='newPost.description' name='inputDescription' minlength='5'>
+              <small class="text-muted">Enter the description of the posting.</small>
+              <div ng-messages='modalForm.inputDescription.$error'>
+                <div ng-message='minlength'>Description must be at least 5 characters long.</div>
+              </div>
             </fieldset>
             <fieldset class="form-group">
-            <label>Image URL</label>
-            <input type="text" class="form-control" ng-model='newPost.url' name='inputUrl' minlength='5'>
-            <small class="text-muted">Enter the URL of the image for the posting.</small>
-            <div ng-messages='modalForm.inputUrl.$error'>
-              <div ng-message='minlength'>Url must be at least 5 characters long.</div>
-            </div>
+              <label>Image URL</label>
+              <input type="text" class="form-control" ng-model='newPost.url' name='inputUrl' minlength='5'>
+              <small class="text-muted">Enter the URL of the image for the posting.</small>
+              <div ng-messages='modalForm.inputUrl.$error'>
+                <div ng-message='minlength'>Url must be at least 5 characters long.</div>
+              </div>
             </fieldset>
             <fieldset class="form-group">
-            <label>Author</label>
-            <input type="text" class="form-control" ng-model='newPost.author' name='inputAuthor' minlength='5'>
-            <small class="text-muted">Author of the posting.</small>
-            <div ng-messages='modalForm.inputAuthor.$error'>
-              <div ng-message='minlength'>author must be at least 5 characters long.</div>
-            </div>
+              <label>Author</label>
+              <input type="text" class="form-control" ng-model='newPost.author' name='inputAuthor' minlength='5'>
+              <small class="text-muted">Author of the posting.</small>
+              <div ng-messages='modalForm.inputAuthor.$error'>
+                <div ng-message='minlength'>author must be at least 5 characters long.</div>
+              </div>
             </fieldset>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn modalButton" data-dismiss="modal">Close</button>
           <button type="submit" class="btn modalButton" data-toggle="modal" data-target="#myModal">Save changes</button>
         </div>
-      </form>
+        </form>
       </div>
     </div>
   </div>
 
-<section ng-repeat='item in data| filter: search | orderBy: vm.sort'>
-  <article class='posts post'>
-    <div class="row">
-    <div class='image'>
-      <img class='post' ng-src={{item.image}}></img>
-    </div>
-    <div class="posts">
-      <h3>Votes: <span ng-class='{positive: item.votes > 0, negative: item.votes < 0}'>{{item.votes}} | </span>
+  <section class='well' ng-repeat='item in data| filter: search | orderBy: vm.sort'>
+    <article class='posts post'>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-3">
+              <div class='image'>
+                <img class='post' ng-src={{item.image}}></img>
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="posts">
+                <h3>Votes: <span ng-class='{positive: item.votes > 0, negative: item.votes < 0}'>{{item.votes}}</span><span> | </span>
       <span ng-click='up(item)' class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
       <span ng-click='down(item)' class="glyphicon glyphicon-arrow-down"  aria-hidden="true"></span></h3>
 
-      <h3>{{item.title}}</h3>
-      <h3>{{item.description}}</h3>
-      <h3 class='author'>{{item.author}}</h3>
+                <h3>{{item.title}}</h3>
+                <h5>{{item.description}}</h5>
+                <h4 class='author'>Author: {{item.author}}</h4>
 
-      <p><timeless time='item.date'></timeless></p>
+                <p>
+                  <span><strong>Posted: </strong></span><timeless time='item.date'></timeless>
+                </p>
 
-      <h3>Comments: {{item.comments.length}}</h3>
-      <span class="glyphicon glyphicon-comment" aria-hidden="true" ng-click='showComments(item)'></span>
-      <span ng-repeat="comment in item.comments">
-      <h3 ng-show="item.showComment">Author: {{comment.author}}</h3>
-      <h3 ng-show="item.showComment">Comment: {{comment.text}}</h3>
-      </span>
+                <h4><span class="glyphicon glyphicon-comment" aria-hidden="true" ng-click='showComments(item)'> </span> <strong><ng-pluralize count="item.comments.length" when="{1: ' 1 comment', 'other': ' {{ item.comments.length }} comments'}"></ng-pluralize></strong><span> | </span> <span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click='newComment(item)'></span> Add a Comment</h4>
+                <span ng-repeat="comment in item.comments">
+                <div class="col-md-12">
+                  <h5 class='comment'ng-show="item.showComment"><span><strong>{{comment.author}} - </strong></span>
+                <span>{{comment.text}}</span></h5>
+              </div>
+              </span>
+              <div class="comment" ng-show="item.newCommentVisible">
+                <form class="form-inline" ng-submit="addComment(item, newComment)">
+                  <div class="form-group commentAni">
+                    <label>Author</label>
+                    <input type="text" placeholder="author" class="form-control" ng-model="newComment.author">
+                  </div>
+                  <div class="form-group">
+                    <label>Text</label>
+                    <input type="text" placeholder="text" class="form-control" ng-model="newComment.text">
+                  </div>
+                  <input class="btn btn-primary" type="submit" value="Add Comment">
+                </form>
+              </div>
 
-
-      <span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click='newComment(item)'></span>
-        <div class="comment" ng-show="item.newCommentVisible">
-          <form class="form-inline" ng-submit="addComment(item, newComment)">
-            <div class="form-group">
-              <label>Author</label>
-              <input type="text" placeholder="author" class="form-control" ng-model="newComment.author">
             </div>
-            <div class="form-group">
-              <label>Text</label>
-              <input type="text" placeholder="text" class="form-control" ng-model="newComment.text">
-            </div>
-            <input class="btn btn-success" type="submit" value="Add Comment">
-          </form>
+          </div>
         </div>
+      </div>
 
-    </div>
-</div>
-  </article>
-</section>
+
+      </div>
+    </article>
+  </section>
 
 </body>
+
 </html>

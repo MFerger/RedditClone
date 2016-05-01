@@ -128,7 +128,7 @@ app.controller('MainController', function($scope) {
   $scope.newPost = {};
   $scope.data = [{
     id: 1,
-    title: 'spen',
+    title: 'Aspen',
     image: 'http://www.gettyimages.ca/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg',
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula fermentum neque et congue. Vestibulum sed nulla dictum, accumsan nulla a, mattis tortor. Mauris purus risus, maximus ac risus quis, suscipit sagittis lectus. Nulla sit amet pulvinar lorem. Integer in sapien finibus, scelerisque lacus eget, malesuada diam.",
     author: "Bud Anin",
@@ -180,8 +180,8 @@ app.controller('MainController', function($scope) {
       newCommentVisible: false
   }, {
     id: 4,
-    title: 'spen',
-    image: 'http://www.gettyimages.ca/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg',
+    title: 'Belgium',
+    image: 'http://www.tourist-destinations.net/wp-content/uploads/2013/05/Belgium-1.jpg',
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula fermentum neque et congue. Vestibulum sed nulla dictum, accumsan nulla a, mattis tortor. Mauris purus risus, maximus ac risus quis, suscipit sagittis lectus. Nulla sit amet pulvinar lorem. Integer in sapien finibus, scelerisque lacus eget, malesuada diam.",
     author: "Bud Anin",
     date: new Date('April 26, 2016'),
@@ -196,8 +196,8 @@ app.controller('MainController', function($scope) {
       newCommentVisible: false
   }, {
     id: 5,
-    title: 'spen',
-    image: 'http://www.gettyimages.ca/gi-resources/images/Homepage/Hero/UK/CMS_Creative_164657191_Kingfisher.jpg',
+    title: 'Amsterdam',
+    image: 'http://www.fluentin3months.com/wp-content/uploads/2011/05/amsterdam.jpg',
     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula fermentum neque et congue. Vestibulum sed nulla dictum, accumsan nulla a, mattis tortor. Mauris purus risus, maximus ac risus quis, suscipit sagittis lectus. Nulla sit amet pulvinar lorem. Integer in sapien finibus, scelerisque lacus eget, malesuada diam.",
     author: "Bud Anin",
     date: new Date('April 25, 2016'),
@@ -210,7 +210,24 @@ app.controller('MainController', function($scope) {
       ],
       showComment: false,
       newCommentVisible: false
-  }];
+  },{
+    id: 5,
+    title: 'Caribbean',
+    image: 'http://english.colorado.edu/wp-content/uploads/2014/05/Caribbean-Vacations.jpg',
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula fermentum neque et congue. Vestibulum sed nulla dictum, accumsan nulla a, mattis tortor. Mauris purus risus, maximus ac risus quis, suscipit sagittis lectus. Nulla sit amet pulvinar lorem. Integer in sapien finibus, scelerisque lacus eget, malesuada diam.",
+    author: "Bud Anin",
+    date: new Date('April 24, 2016'),
+    votes: 6,
+    comments: [
+        {
+          author: "George",
+          text: "I've been here, great place!"
+        }
+      ],
+      showComment: false,
+      newCommentVisible: false
+  }
+];
   $scope.sort = function(sorted) {
     $scope.vm.sort = sorted;
   };
