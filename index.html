@@ -19,6 +19,7 @@
 </head>
 
 <body ng-controller='MainController'>
+  <!--Navbar-->
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -54,7 +55,7 @@
     </div>
   </nav>
 
-  <!-- Modal -->
+  <!-- Bootstrap Modal -->
   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -105,29 +106,32 @@
       </div>
     </div>
   </div>
-
+  <!--Posting forms -->
   <section class='well' ng-repeat='item in data| filter: search | orderBy: vm.sort'>
     <article class='posts post'>
       <div class="row">
         <div class="col-md-12">
           <div class="row">
+            <div class="col-md-1 text-center">
+              <div class="upvotes">
+                <h3><span ng-click='up(item)' class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></h3>
+                <h3><span ng-class='{positive: item.votes > 0, negative: item.votes < 0}'>{{item.votes}}</span></h3>
+                <h3><span ng-click='down(item)' class="glyphicon glyphicon-arrow-down"  aria-hidden="true"></span></h3>
+              </div>
+            </div>
             <div class="col-md-3">
               <div class='image'>
                 <img class='post' ng-src={{item.image}}></img>
               </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-8">
               <div class="posts">
-                <h3>Votes: <span ng-class='{positive: item.votes > 0, negative: item.votes < 0}'>{{item.votes}}</span><span> | </span>
-      <span ng-click='up(item)' class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-      <span ng-click='down(item)' class="glyphicon glyphicon-arrow-down"  aria-hidden="true"></span></h3>
-
                 <h3>{{item.title}}</h3>
                 <h5>{{item.description}}</h5>
                 <h4 class='author'>Author: {{item.author}}</h4>
-
                 <p>
-                  <span><strong>Posted: </strong></span><timeless time='item.date'></timeless>
+                  <span><strong>Posted: </strong></span>
+                  <timeless time='item.date'></timeless>
                 </p>
 
                 <h4><span class="glyphicon glyphicon-comment" aria-hidden="true" ng-click='showComments(item)'> </span> <strong><ng-pluralize count="item.comments.length" when="{1: ' 1 comment', 'other': ' {{ item.comments.length }} comments'}"></ng-pluralize></strong><span> | </span> <span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click='newComment(item)'></span> Add a Comment</h4>
@@ -155,8 +159,6 @@
           </div>
         </div>
       </div>
-
-
       </div>
     </article>
   </section>
