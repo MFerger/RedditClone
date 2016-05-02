@@ -67,7 +67,7 @@
           <form ng-submit="addPost(newPost)" name='modalForm'>
             <fieldset class="form-group">
               <label>Title</label>
-              <input type="text" class="form-control" ng-model='newPost.title' name='inputTitle' minlength='5'>
+              <input type="text" class="form-control" ng-model='newPost.title' name='inputTitle' minlength='5' required>
               <small class="text-muted">Enter the title of your posting.</small>
               <div ng-messages='modalForm.inputTitle.$error'>
                 <div ng-message='minlength'>Title must be at least 5 characters long.</div>
@@ -75,7 +75,7 @@
             </fieldset>
             <fieldset class="form-group">
               <label>Description</label>
-              <input type="text" class="form-control" ng-model='newPost.description' name='inputDescription' minlength='5'>
+              <input type="text" class="form-control" ng-model='newPost.description' name='inputDescription' minlength='5' required>
               <small class="text-muted">Enter the description of the posting.</small>
               <div ng-messages='modalForm.inputDescription.$error'>
                 <div ng-message='minlength'>Description must be at least 5 characters long.</div>
@@ -83,7 +83,7 @@
             </fieldset>
             <fieldset class="form-group">
               <label>Image URL</label>
-              <input type="text" class="form-control" ng-model='newPost.url' name='inputUrl' minlength='5'>
+              <input type="text" class="form-control" ng-model='newPost.url' name='inputUrl' minlength='5' required>
               <small class="text-muted">Enter the URL of the image for the posting.</small>
               <div ng-messages='modalForm.inputUrl.$error'>
                 <div ng-message='minlength'>Url must be at least 5 characters long.</div>
@@ -91,7 +91,7 @@
             </fieldset>
             <fieldset class="form-group">
               <label>Author</label>
-              <input type="text" class="form-control" ng-model='newPost.author' name='inputAuthor' minlength='5'>
+              <input type="text" class="form-control" ng-model='newPost.author' name='inputAuthor' minlength='5' required>
               <small class="text-muted">Author of the posting.</small>
               <div ng-messages='modalForm.inputAuthor.$error'>
                 <div ng-message='minlength'>author must be at least 5 characters long.</div>
@@ -134,7 +134,7 @@
                   <timeless time='item.date'></timeless>
                 </p>
 
-                <h4><span class="glyphicon glyphicon-comment" aria-hidden="true" ng-click='showComments(item)'> </span> <strong><ng-pluralize count="item.comments.length" when="{1: ' 1 comment', 'other': ' {{ item.comments.length }} comments'}"></ng-pluralize></strong><span> | </span> <span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click='newComment(item)'></span> Add a Comment</h4>
+                <h4><span class="glyphicon glyphicon-comment" aria-hidden="true" ng-click='showComments(item)'> </span> <strong><ng-pluralize count="item.comments.length" when="{1: ' 1 comment', 'other': ' {{ item.comments.length }} comments'}"></ng-pluralize></strong><span> | </span> <span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click='newComment(item)'></span> <strong>Add a Comment</strong></h4>
                 <span ng-repeat="comment in item.comments">
                 <div class="col-md-12">
                   <h5 class='comment'ng-show="item.showComment"><span><strong>{{comment.author}} - </strong></span>
