@@ -1,0 +1,52 @@
+<span>
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button-primary" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Create a posting</h4>
+        </div>
+        <div class="modal-body">
+          <form ng-submit="addPost(newPost)" name='modalForm'>
+            <fieldset class="form-group">
+              <label>Title</label>
+              <input type="text" class="form-control" ng-model='newPost.title' name='inputTitle' minlength='5' required>
+              <small class="text-muted">Enter the title of your posting.</small>
+              <div ng-messages='modalForm.inputTitle.$error'>
+                <div ng-message='minlength'>Title must be at least 5 characters long.</div>
+              </div>
+            </fieldset>
+            <fieldset class="form-group">
+              <label>Description</label>
+              <input type="text" class="form-control" ng-model='newPost.description' name='inputDescription' minlength='5' required>
+              <small class="text-muted">Enter the description of the posting.</small>
+              <div ng-messages='modalForm.inputDescription.$error'>
+                <div ng-message='minlength'>Description must be at least 5 characters long.</div>
+              </div>
+            </fieldset>
+            <fieldset class="form-group">
+              <label>Image URL</label>
+              <input type="text" class="form-control" ng-model='newPost.url' name='inputUrl' minlength='5' required>
+              <small class="text-muted">Enter the URL of the image for the posting.</small>
+              <div ng-messages='modalForm.inputUrl.$error'>
+                <div ng-message='minlength'>Url must be at least 5 characters long.</div>
+              </div>
+            </fieldset>
+            <fieldset class="form-group">
+              <label>Author</label>
+              <input type="text" class="form-control" ng-model='newPost.author' name='inputAuthor' minlength='5' required>
+              <small class="text-muted">Author of the posting.</small>
+              <div ng-messages='modalForm.inputAuthor.$error'>
+                <div ng-message='minlength'>author must be at least 5 characters long.</div>
+              </div>
+            </fieldset>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn modalButton" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn modalButton" data-toggle="modal" data-target="#myModal">Save changes</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</span>

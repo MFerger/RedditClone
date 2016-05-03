@@ -12,157 +12,31 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
-  <script src="app.js" charset="utf-8"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.js" charset="utf-8"></script>
+
   <link rel="stylesheet" href="style.css">
+
+  <!-- module -->
+  <script src="module/module.js" charset="utf-8"></script>
+
+  <!-- services -->
+  <script src="service/post.service.js" charset="utf-8"></script>
+
+  <!-- directives -->
+  <script src="directives/header/header.js" charset="utf-8"></script>
+  <script src="directives/postings/postings.js" charset="utf-8"></script>
+  <script src="directives/modal/modal.js" charset="utf-8"></script>
+  <script src="directives/postings/time.js" charset="utf-8"></script>
+
+  <!-- controllers -->
+  <script src="controllers/maincontroller.js" charset="utf-8"></script>
+
   <title>Reddit 2.0</title>
 </head>
 
 <body ng-controller='MainController'>
-  <!--Navbar-->
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Reddit 2.0</a>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li><a data-toggle="modal" data-target="#myModal" id='submitButton'>+Submit New Post</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By: <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li ng-click="sort('-votes')"><a href="#">Votes</a></li>
-              <li ng-click="sort('-date')"><a href="#">Newest Date</a></li>
-              <li ng-click="sort('title')"><a href="#">Title</a></li>
-            </ul>
-          </li>
-        </ul>
-        <form class="navbar-form navbar-center" role="search">
-          <div class="form-group">
-            <input type="text" class="form-control" ng-model="search" placeholder="Search">
-          </div>
-        </form>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Bootstrap Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button-primary" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Create a posting</h4>
-        </div>
-        <div class="modal-body">
-          <form ng-submit="addPost(newPost)" name='modalForm'>
-            <fieldset class="form-group">
-              <label>Title</label>
-              <input type="text" class="form-control" ng-model='newPost.title' name='inputTitle' minlength='5' required>
-              <small class="text-muted">Enter the title of your posting.</small>
-              <div ng-messages='modalForm.inputTitle.$error'>
-                <div ng-message='minlength'>Title must be at least 5 characters long.</div>
-              </div>
-            </fieldset>
-            <fieldset class="form-group">
-              <label>Description</label>
-              <input type="text" class="form-control" ng-model='newPost.description' name='inputDescription' minlength='5' required>
-              <small class="text-muted">Enter the description of the posting.</small>
-              <div ng-messages='modalForm.inputDescription.$error'>
-                <div ng-message='minlength'>Description must be at least 5 characters long.</div>
-              </div>
-            </fieldset>
-            <fieldset class="form-group">
-              <label>Image URL</label>
-              <input type="text" class="form-control" ng-model='newPost.url' name='inputUrl' minlength='5' required>
-              <small class="text-muted">Enter the URL of the image for the posting.</small>
-              <div ng-messages='modalForm.inputUrl.$error'>
-                <div ng-message='minlength'>Url must be at least 5 characters long.</div>
-              </div>
-            </fieldset>
-            <fieldset class="form-group">
-              <label>Author</label>
-              <input type="text" class="form-control" ng-model='newPost.author' name='inputAuthor' minlength='5' required>
-              <small class="text-muted">Author of the posting.</small>
-              <div ng-messages='modalForm.inputAuthor.$error'>
-                <div ng-message='minlength'>author must be at least 5 characters long.</div>
-              </div>
-            </fieldset>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn modalButton" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn modalButton" data-toggle="modal" data-target="#myModal">Save changes</button>
-        </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <!--Posting forms -->
-  <section class='well' ng-repeat='item in data| filter: search | orderBy: vm.sort'>
-    <article class='posts post'>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="row rowUp">
-            <div class="col-md-1 text-center">
-              <div class="upvotes">
-                <h3><span ng-click='up(item)' class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></h3>
-                <h3><span ng-class='{positive: item.votes > 0, negative: item.votes < 0}'>{{item.votes}}</span></h3>
-                <h3><span ng-click='down(item)' class="glyphicon glyphicon-arrow-down"  aria-hidden="true"></span></h3>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class='image'>
-                <img class='post' ng-src={{item.image}}></img>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="posts">
-                <h3>{{item.title}}</h3>
-                <h5>{{item.description}}</h5>
-                <h4 class='author'>Author: {{item.author}}</h4>
-                <p>
-                  <span><strong>Posted: </strong></span>
-                  <timeless time='item.date'></timeless>
-                </p>
-
-                <h4><span class="glyphicon glyphicon-comment" aria-hidden="true" ng-click='showComments(item)'> </span> <strong><ng-pluralize count="item.comments.length" when="{1: ' 1 comment', 'other': ' {{ item.comments.length }} comments'}"></ng-pluralize></strong><span> | </span> <span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click='newComment(item)'></span> <strong>Add a Comment</strong></h4>
-                <span ng-repeat="comment in item.comments">
-                <div class="col-md-12">
-                  <h5 class='comment'ng-show="item.showComment"><span><strong>{{comment.author}} - </strong></span>
-                <span>{{comment.text}}</span></h5>
-              </div>
-              </span>
-              <div class="comment" ng-show="item.newCommentVisible">
-                <form class="form-inline" ng-submit="addComment(item, newComment)">
-                  <div class="form-group commentAni">
-                    <label>Author</label>
-                    <input type="text" placeholder="author" class="form-control" ng-model="newComment.author">
-                  </div>
-                  <div class="form-group">
-                    <label>Text</label>
-                    <input type="text" placeholder="text" class="form-control" ng-model="newComment.text">
-                  </div>
-                  <input class="btn btn-primary" type="submit" value="Add Comment">
-                </form>
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-    </article>
-  </section>
-
+<header-nav></header-nav>
+<posting></posting>
+<modal></modal>
 </body>
-
 </html>

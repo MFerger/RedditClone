@@ -1,5 +1,4 @@
-angular.module('form', ['ngAnimate', 'ngMessages'])
-
+angular.module('form')
  .directive('timeless', function() {
 
   var Timeless;
