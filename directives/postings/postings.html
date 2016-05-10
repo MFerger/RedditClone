@@ -33,14 +33,14 @@
             </div>
             </span>
             <div class="comment" ng-show="item.newCommentVisible">
-              <form class="form-inline" ng-submit="addComment(item, newComment)">
+              <form class="form-inline" ng-submit="addComment(item, newComment[$index], $index)">
                 <div class="form-group commentAni">
                   <label>Author</label>
-                  <input type="text" placeholder="author" class="form-control" ng-model="newComment.author">
+                  <input type="text" placeholder="author" class="form-control" ng-model="newComment[$index].author">
                 </div>
                 <div class="form-group">
                   <label>Text</label>
-                  <input type="text" placeholder="text" class="form-control" ng-model="newComment.text">
+                  <input type="text" placeholder="text" class="form-control" ng-model="newComment[$index].text">
                 </div>
                 <input class="btn btn-primary" type="submit" value="Add Comment">
               </form>

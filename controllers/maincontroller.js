@@ -37,11 +37,11 @@ angular.module('form')
       $scope.vm.newPostVisible = false;
       $scope.newPost = {};
     };
-$scope.addComment = function(post, comment) {
+$scope.addComment = function(post, comment, index) {
   if (comment.author && comment.text) {
     post.comments.push(comment);
     post.newCommentVisible = false;
-    $scope.newComment = {};
+    $scope.newComment[index] = null;
   }
 };
 })
