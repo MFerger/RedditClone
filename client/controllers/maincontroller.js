@@ -3,10 +3,10 @@ angular.module('form')
   $scope.vm = {};
   $scope.newComments = {};
   $scope.newPostVisible = false;
-  $scope.newPost = {};
   $scope.sort = function(sorted) {
     $scope.vm.sort = sorted;
   };
+  $scope.newPost = {};
 
   $scope.up = function(post) {
     post.votes++
