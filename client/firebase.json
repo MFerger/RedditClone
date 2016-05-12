@@ -1,0 +1,9 @@
+{
+  "firebase": "redditCloneRefactor",
+  "public": "./",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**"
+  ]
+}

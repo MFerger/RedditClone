@@ -1,0 +1,54 @@
+<section class='well' ng-repeat='item in serverData| filter: search | orderBy: vm.sort'>
+  <article class='posts post'>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row rowUp">
+          <div class="col-md-1 text-center">
+            <div class="upvotes">
+              <h3><span ng-click='up(item)' class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></h3>
+              <h3><span ng-class='{positive: item.votes > 0, negative: item.votes < 0}'>{{item.votes}}</span></h3>
+              <h3><span ng-click='down(item)' class="glyphicon glyphicon-arrow-down"  aria-hidden="true"></span></h3>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class='image'>
+              <img class='post' ng-src={{item.img_url}}></img>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="posts">
+              <h3>{{item.title}}</h3>
+              <h5>{{item.description}}</h5>
+              <h4 class='author'>Author: {{item.author}}</h4>
+              <p>
+                <span><strong>Posted: </strong></span>
+                <timeless time='item.date'></timeless>
+              </p>
+
+              <h4><span class="glyphicon glyphicon-comment" aria-hidden="true" ng-click='showComments(item)'> </span> <strong><ng-pluralize count="item.comments.length" when="{1: ' 1 comment', 'other': ' {{ item.comments.length }} comments'}"></ng-pluralize></strong><span> | </span> <span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click='newComment(item)'></span> <strong>Add a Comment</strong></h4>
+              <span ng-repeat="comment in item.comments">
+              <div class="col-md-12">
+                <h5 class='comment'ng-show="item.showComment"><span><strong>{{comment.author}} - </strong></span>
+              <span>{{comment.text}}</span></h5>
+            </div>
+            </span>
+            <div class="comment" ng-show="item.newCommentVisible">
+              <form class="form-inline" ng-submit="addComment(item, newComment[$index], $index)">
+                <div class="form-group commentAni">
+                  <label>Author</label>
+                  <input type="text" placeholder="author" class="form-control" ng-model="newComment[$index].author">
+                </div>
+                <div class="form-group">
+                  <label>Text</label>
+                  <input type="text" placeholder="text" class="form-control" ng-model="newComment[$index].text">
+                </div>
+                <input class="btn btn-primary" type="submit" value="Add Comment">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </article>
+</section>
