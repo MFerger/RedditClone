@@ -1,13 +1,13 @@
-<section class='well' ng-repeat='item in serverData| filter: search | orderBy: vm.sort'>
+<section class='well' ng-repeat='item in serverData.posts| filter: search | orderBy: vm.sort'>
   <article class='posts post'>
     <div class="row">
       <div class="col-md-12">
         <div class="row rowUp">
           <div class="col-md-1 text-center">
             <div class="upvotes">
-              <h3><span ng-click='up(item)' class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></h3>
+              <h3><span ng-click='vm.changeVotes(item.id, "up")' class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></h3>
               <h3><span ng-class='{positive: item.votes > 0, negative: item.votes < 0}'>{{item.votes}}</span></h3>
-              <h3><span ng-click='down(item)' class="glyphicon glyphicon-arrow-down"  aria-hidden="true"></span></h3>
+              <h3><span ng-click='vm.changeVotes(item.id, "down")' class="glyphicon glyphicon-arrow-down"  aria-hidden="true"></span></h3>
             </div>
           </div>
           <div class="col-md-3">
@@ -25,11 +25,11 @@
                 <timeless time='item.date'></timeless>
               </p>
 
-              <h4><span class="glyphicon glyphicon-comment" aria-hidden="true" ng-click='showComments(item)'> </span> <strong><ng-pluralize count="item.comments.length" when="{1: ' 1 comment', 'other': ' {{ item.comments.length }} comments'}"></ng-pluralize></strong><span> | </span> <span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click='newComment(item)'></span> <strong>Add a Comment</strong></h4>
+              <h4><span class="glyphicon glyphicon-comment" aria-hidden="true" ng-click='showComments()'> </span> <strong><ng-pluralize count="item.comments.length" when="{1: ' 1 comment', 'other': ' {{ item.comments.length }} comments'}"></ng-pluralize></strong><span> | </span> <span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click='newComment(item)'></span> <strong>Add a Comment</strong></h4>
               <span ng-repeat="comment in item.comments">
               <div class="col-md-12">
-                <h5 class='comment'ng-show="item.showComment"><span><strong>{{comment.author}} - </strong></span>
-              <span>{{comment.text}}</span></h5>
+                <h5 class='comment' ng-show="showComment"><span><strong>{{comment.user_id}} - </strong></span>
+              <span>{{comment.content}}</span></h5>
             </div>
             </span>
             <div class="comment" ng-show="item.newCommentVisible">

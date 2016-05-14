@@ -21,7 +21,7 @@ angular.module('form')
   };
 
   $scope.showComments = function(post) {
-    post.showComment = !post.showComment;
+    comment.showComment = !comment.showComment;
   };
 
   $scope.addPost = function(post) {

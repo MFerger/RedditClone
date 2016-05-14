@@ -7,7 +7,7 @@
           <h4 class="modal-title" id="myModalLabel">Create a posting</h4>
         </div>
         <div class="modal-body">
-          <form ng-submit="addPost(newPost)" name='modalForm'>
+          <form ng-submit="onClick()" name='modalForm'>
             <fieldset class="form-group">
               <label>Title</label>
               <input type="text" class="form-control" ng-model='newPost.title' name='inputTitle' minlength='5' required>
