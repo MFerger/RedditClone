@@ -3,17 +3,8 @@
 
   angular.module('form')
     .factory('postsService', factory);
-    // Factories return services
-
-    // factory.$inject = ['$http'];
-
     function factory($http) {
-        var posts = [];
-
-    // $scope.$watch(function () {
-    //   return $scope.data = posts;
-    // });
-
+      var posts = [];
       var factory = this;
 
       listPosts();
