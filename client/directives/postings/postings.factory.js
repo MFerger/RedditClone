@@ -8,7 +8,12 @@
     // factory.$inject = ['$http'];
 
     function factory($http) {
-      var posts = [];
+        var posts = [];
+
+    // $scope.$watch(function () {
+    //   return $scope.data = posts;
+    // });
+
       var factory = this;
 
       listPosts();
@@ -63,7 +68,5 @@
       }
 
     }
-
-
 
 }());

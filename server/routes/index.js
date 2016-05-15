@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var knex = require('knex')(require('../knexfile')[process.env.NODE_ENV || 'development']);
 
-
 router.get('/posts', function(req, res, next) {
   var results = {};
   knex('posts')
@@ -24,24 +23,43 @@ router.get('/posts', function(req, res, next) {
   })
 });
 
-
-router.post('/votes', (req, res, next) => {
-  console.log('wooooo it got to the votes in the router');
-  console.log(req.body);
-  var post_id = req.body.id;
-  var changeVoteVal = (
-    req.body.upOrDown === 1
-      ? 'votes + 1'
-      : 'votes - 1'
-  )
-  console.log(changeVoteVal);
+router.post('/votes', (req, res, next) =>{
+  const post_id = req.body.id;
+  const upOrDown = req.body.upOrDown;
+  const changeVoteVal = (
+    upOrDown === 'up' ? 'votes + 1' : 'votes - 1'
+  );
   knex('posts')
-    .where({id: post_id}).first()
-    .update('votes', knex.raw(changeVoteVal))
-    .then(votes =>{})
-    .catch(err =>{
-      res.send({err})
-    });
+  .where( {post_id} ).first()
+  .update('votes', knex.raw(changeVoteVal))
+  .returning('*')
+  .then( votes => {
+    res.json(votes[0])
+  })
+  .catch( err => {
+    res.send( {err} )
+  });
 });
+
+//
+//
+// router.post('/votes', (req, res, next) => {
+//   console.log('wooooo it got to the votes in the router');
+//   console.log(req.body);
+//   var post_id = req.body.id;
+//   var changeVoteVal = (
+//     req.body.upOrDown === 1
+//       ? 'votes + 1'
+//       : 'votes - 1'
+//   )
+//   console.log(changeVoteVal);
+//   knex('posts')
+//     .where({id: post_id}).first()
+//     .update('votes', knex.raw(changeVoteVal))
+//     .then(votes =>{})
+//     .catch(err =>{
+//       res.send({err})
+//     });
+// });
 
 module.exports = router;
