@@ -5,8 +5,7 @@
     'ui.router',
     'app.postings',
     'app.newPost',
-    'app.newUser'
-    // 'app.submit'
+    'app.time'
   ];
 
   angular.module('app', dependencies)
@@ -14,7 +13,6 @@
 
   setupRoutes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider'];
   function setupRoutes($stateProvider, $urlRouterProvider, $locationProvider){
-    console.log('HEY APP>MODULE!');
     $locationProvider.html5Mode(true);
     $urlRouterProvider.otherwise("/");
 

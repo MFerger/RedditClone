@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('form')
+  angular.module('app.postings')
     .factory('postsService', factory);
     function factory($http) {
       var posts = [];

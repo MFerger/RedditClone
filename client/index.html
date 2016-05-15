@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app='form'>
+<html ng-app='app'>
 
 <head>
   <meta charset="UTF-8">
@@ -16,27 +16,29 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
 
 
-  <link rel="stylesheet" href="style.css">
 
   <!-- module -->
-  <script src="app/module/app.module.js" charset="utf-8"></script>
   <script src="app/postings/postings.module.js"></script>
-  <script src="app/postings/newPost.module.js"></script>
-  <script src="app/postings/singup.module.js"></script>
+  <script src="app/postings/postings.directive.js" charset="utf-8"></script>
+  <script src="app/postings/postings.factory.js"></script>
+  <script src="app/postings/time.js" charset="utf-8"></script>
+
+  <script src="app/newPost/newPost.module.js"></script>
+  <script src="app/newPost/newPost.directive.js" charset="utf-8"></script>
+  <script src="app/newPost/newPost.factory.js"></script>
+  <!-- <script src="app/signup/singup.module.js"></script> -->
 
   <!-- services and factories-->
-  <script src="app/postings/postings.factory.js"></script>
-  <script src="app/postings/newPost.factory.js"></script>
-  <script src="app/postings/singup.factory.js"></script>
+  <!-- <script src="app/signup/singup.factory.js"></script> -->
 
   <!-- app -->
+  <script src="app/module/app.module.js" charset="utf-8"></script>
+  <!-- <script src="app/signup/signup.directive.js" charset="utf-8"></script> -->
   <script src="app/layout/header.directive.js" charset="utf-8"></script>
   <script src="app/layout/layout.directive.js" charset="utf-8"></script>
-  <script src="app/postings/postings.directive.js" charset="utf-8"></script>
-  <script src="app/newPost/newPost.directive.js" charset="utf-8"></script>
-  <script src="app/postings/time.js" charset="utf-8"></script>
-  <script src="app/signup/signup.directive.js" charset="utf-8"></script>
 
+  <base href="/" />
+  <link rel="stylesheet" href="style.css">
 
   <!-- controllers -->
   <!-- <script src="controllers/maincontroller.js" charset="utf-8"></script> -->
@@ -47,14 +49,12 @@
 <body>
 
   <a ui-sref="/signup">Signup</a>
-  <a ui-sref="/newPost">Signup</a>
+  <a ui-sref="/newPost">New Post</a>
 
 
 <header-nav></header-nav>
-  <!-- <modal></modal>
-  <posting></posting> -->
 
-  <ng-view></ng-view>
+  <ui-view></ui-view>
 
 </body>
 

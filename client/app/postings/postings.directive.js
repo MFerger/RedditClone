@@ -6,23 +6,25 @@
       .directive('postings', postingFunction);
 
 function postingFunction () {
+  console.log('it got to the posting function');
   return {
       scope: {},
-      templateUrl: '/app/postings/postings.directive.html',
+      templateUrl: '/app/postings/postings.html',
       controller: controller,
       controllerAs: 'vm'
     }
   }
 
-  function controller(postsService, $scope) {
+  function controller(postsService) {
     //$scope.click = click //ng-click='click()'
+    console.log('it got to the posts controllerAs');
     var vm = this;
     activate();
     vm.changeVotes = changeVotes;
-    $scope.showComment = false;
+    vm.showComment = false;
 
-    $scope.showComments = function () {
-      $scope.showComment = !$scope.showComment;
+    vm.showComments = function () {
+      vm.showComment = !vm.showComment;
     };
 
      function changeVotes (item, upordown) {
@@ -30,8 +32,9 @@ function postingFunction () {
       }
 
     function activate () {
+      console.log('it got to the activate function');
       postsService.list().then(function(data){
-        $scope.serverData = data;
+        vm.serverData = data;
       })
     }
   }

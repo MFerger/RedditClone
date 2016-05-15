@@ -1,4 +1,4 @@
-angular.module('form')
+angular.module('app.time', [])
  .directive('timeless', function() {
 
   var Timeless;

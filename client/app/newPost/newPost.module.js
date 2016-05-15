@@ -1,8 +1,8 @@
 (function() {
   'use strict';
 
-  angular.module('app.newPost', []);
-  .config(function submitNewPost($stateProvider, $urlRouterProvider, $locationProvider) {
+  angular.module('app.newPost', [])
+    .config(function submitNewPost($stateProvider, $urlRouterProvider, $locationProvider) {
   $urlRouterProvider.otherwise("/");
 
   $stateProvider

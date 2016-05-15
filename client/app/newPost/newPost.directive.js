@@ -7,7 +7,7 @@
   function newPostFunction(postsService) {
     return {
       scope: {},
-      templateUrl: '/directives/modal/modal.html',
+      templateUrl: '/app/newPost/newPost.html',
       controller: controller,
       controllerAs: 'vm'
   }

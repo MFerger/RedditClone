@@ -8,7 +8,7 @@
     $stateProvider
       .state('newUser', {
         url: '/signup',
-        templateUrl: '/app/signup/signup.directive.html',
+        templateUrl: '/app/signup/signup.html',
         controller: signupController,
         controllerAs: 'vm'
       });
@@ -25,5 +25,5 @@
       });
     }
   }
-  
+
 }());

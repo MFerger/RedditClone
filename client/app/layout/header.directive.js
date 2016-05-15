@@ -1,13 +1,13 @@
 (function() {
   'use strict';
 
-  angular.module('form')
+  angular.module('app')
   .directive('headerNav', headerNavFunction);
 
   function headerNavFunction () {
     return {
       restrict: 'E',
-      templateUrl: '/directives/header/header.html',
+      templateUrl: 'app/layout/header.html',
       controller: controller
     }
   function controller () {
