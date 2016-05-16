@@ -5,6 +5,7 @@
     'ui.router',
     'app.postings',
     'app.newPost',
+    'app.newUser',
     'app.time'
   ];
 

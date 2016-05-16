@@ -11,20 +11,34 @@ function postingFunction () {
       scope: {},
       templateUrl: '/app/postings/postings.html',
       controller: controller,
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      link: function (vm) {
+        vm.$on('showSingleComment', function (event, data) {
+          vm.showComment = data;
+          console.log(vm.showComment, "SADFKJASLKDFJLKASJDFLKJ");
+          // scope.$apply()
+        })
+      }
     }
   }
 
-  function controller(postsService) {
+  function controller(postsService, $scope) {
     //$scope.click = click //ng-click='click()'
-    console.log('it got to the posts controllerAs');
     var vm = this;
     activate();
     vm.changeVotes = changeVotes;
+
+    $scope.$watch('vm.showComment', function (data) {
+      console.log('watch is working', data);
+        $scope.$broadcast('showSingleComment', data)
+      });
+
     vm.showComment = false;
 
-    vm.showComments = function () {
-      vm.showComment = !vm.showComment;
+    vm.showComments = function (item) {
+      console.log('the show comments function was fired', item);
+      console.log('show comments function', vm.showComment);
+      item.showComment = !item.showComment;
     };
 
      function changeVotes (item, upordown) {

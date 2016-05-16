@@ -25,10 +25,11 @@
                 <timeless time='item.date'></timeless>
               </p>
 
-              <h4><span class="glyphicon glyphicon-comment" aria-hidden="true" ng-click='showComments()'> </span> <strong><ng-pluralize count="item.comments.length" when="{1: ' 1 comment', 'other': ' {{ item.comments.length }} comments'}"></ng-pluralize></strong><span> | </span> <span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click='newComment(item)'></span> <strong>Add a Comment</strong></h4>
-              <span ng-repeat="comment in item.comments">
+              <h4><span class="glyphicon glyphicon-comment" aria-hidden="true" ng-click='vm.showComments(item)'> </span> <strong><ng-pluralize count="item.comments.length" when="{1: ' 1 comment', 'other': ' {{ item.comments.length }} comments'}"></ng-pluralize></strong><span> | </span> <span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click='vm.newComment(item)'></span> <strong>Add a Comment</strong></h4>
+              {{vm.showComment}}
+              <span ng-show="vm.showComment" ng-repeat="comment in item.comments">
               <div class="col-md-12">
-                <h5 class='comment' ng-show="showComment"><span><strong>{{comment.user_id}} - </strong></span>
+                <h5 class='comment' ><span><strong>{{comment.user_id}} - </strong></span>
               <span>{{comment.content}}</span></h5>
             </div>
             </span>
