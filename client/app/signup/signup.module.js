@@ -21,7 +21,7 @@
     vm.addUser = addUser;
 
     function addUser(user) {
-      // console.log("add user functionnnn", user);
+      console.log("add user functionnnn", user);
       newUser.add(user)
       .then(function() {
         vm.user = {};
