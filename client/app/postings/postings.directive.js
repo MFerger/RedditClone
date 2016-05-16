@@ -12,10 +12,10 @@ function postingFunction () {
       templateUrl: '/app/postings/postings.html',
       controller: controller,
       controllerAs: 'vm',
-      link: function (vm) {
-        vm.$on('showSingleComment', function (event, data) {
-          vm.showComment = data;
-          console.log(vm.showComment, "SADFKJASLKDFJLKASJDFLKJ");
+      link: function (item) {
+        item.$on('showSingleComment', function (event, data) {
+          item.showComment = data;
+          // console.log(item.showComment, "SADFKJASLKDFJLKASJDFLKJ");
           // scope.$apply()
         })
       }
@@ -29,15 +29,12 @@ function postingFunction () {
     vm.changeVotes = changeVotes;
 
     $scope.$watch('vm.showComment', function (data) {
-      console.log('watch is working', data);
         $scope.$broadcast('showSingleComment', data)
       });
 
     vm.showComment = false;
 
     vm.showComments = function (item) {
-      console.log('the show comments function was fired', item);
-      console.log('show comments function', vm.showComment);
       item.showComment = !item.showComment;
     };
 
@@ -46,7 +43,6 @@ function postingFunction () {
       }
 
     function activate () {
-      console.log('it got to the activate function');
       postsService.list().then(function(data){
         vm.serverData = data;
       })

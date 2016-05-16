@@ -9,7 +9,7 @@
       restrict: 'E',
       templateUrl: '/app/layout/layout.html',
       controller: function () {
-        console.log("Blah blah");
+        // console.log("Blah blah");
       }
     }
   }
