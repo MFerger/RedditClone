@@ -8,7 +8,7 @@
   $stateProvider
     .state('newPost', {
       url: '/newpost',
-      templateUrl: '/app/newPost/newPost.directive.html',
+      templateUrl: '/app/newPost/newPost.html',
       controller: newPostController,
       controllerAs: 'vm'
     });

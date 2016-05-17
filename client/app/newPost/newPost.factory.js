@@ -1,3 +1,4 @@
+
 (function(){
   'use strict';
 
@@ -7,19 +8,21 @@
   factory.$inject = ['$http'];
 
   function factory ($http) {
-    var posts = [];
+    var users = [];
 
     return {
-      createPost: createPosts
+      add: addPost,
     };
 
-    function createPosts() {
-      return $http.post('http://localhost:3000/api/v1/posts')
-        .then(function (response) {
-          posts = response.data;
-          return posts;
-        });
+    function addPost(data) {
+      console.log('add post function, step 1 data', data)
+      return $http.post('http://localhost:3000/api/v1/newpost', data)
+      console.log('add post function, step 2 data', data)
+      .then(function (response) {
+        users.push(response.data);
+        return response.data;
+      });
     }
   }
 
-}());
+ }());

@@ -1,6 +1,5 @@
 (function() {
   'use strict';
-  console.log('it got to the signup module');
 
   angular.module('app.newUser', [])
   .config(function signupUsers($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -16,7 +15,6 @@
   });
 
   function signupController(newUser) {
-    console.log('wooo got to the signup Controller!!!%#$*(%$#@*(%*#$@(%$@#*(%$#@*%(#*$)))))');
     var vm = this;
     vm.addUser = addUser;
 

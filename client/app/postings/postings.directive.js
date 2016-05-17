@@ -15,15 +15,12 @@ function postingFunction () {
       link: function (item) {
         item.$on('showSingleComment', function (event, data) {
           item.showComment = data;
-          // console.log(item.showComment, "SADFKJASLKDFJLKASJDFLKJ");
-          // scope.$apply()
         })
       }
     }
   }
 
   function controller(postsService, $scope) {
-    //$scope.click = click //ng-click='click()'
     var vm = this;
     activate();
     vm.changeVotes = changeVotes;

@@ -23,6 +23,22 @@ router.get('/posts', function(req, res, next) {
   })
 });
 
+router.post('/newpost', (req, res, next)=> {
+  var data = {
+     title: req.body.title,
+     img_url: req.body.img_url,
+     description: req.body.description,
+     author: req.body.author,
+     votes: 0,
+     showComment: false,
+     newCommentVisible: false,
+     date: new Date()
+   }
+ knex('posts').insert(data).returning('*').then(function (posts) {
+   res.json(posts[0]);
+ })
+})
+
 router.post('/votes', (req, res, next) =>{
   const post_id = req.body.id;
   const upOrDown = req.body.upOrDown;
