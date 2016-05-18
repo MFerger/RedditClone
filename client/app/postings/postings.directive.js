@@ -6,7 +6,6 @@
       .directive('postings', postingFunction);
 
 function postingFunction () {
-  console.log('it got to the posting function');
   return {
       scope: {},
       templateUrl: '/app/postings/postings.html',

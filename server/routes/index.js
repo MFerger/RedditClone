@@ -43,10 +43,10 @@ router.post('/votes', (req, res, next) =>{
   const post_id = req.body.id;
   const upOrDown = req.body.upOrDown;
   const changeVoteVal = (
-    upOrDown === 'up' ? 'votes + 1' : 'votes - 1'
+    upOrDown === 1 ? 'votes + 1' : 'votes - 1'
   );
   knex('posts')
-  .where( {post_id} ).first()
+  .where( {id: post_id} ).first()
   .update('votes', knex.raw(changeVoteVal))
   .returning('*')
   .then( votes => {

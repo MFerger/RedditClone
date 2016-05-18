@@ -23,8 +23,6 @@
       }
 
       function addPost(newPost) {
-        console.log(newPost);
-        // console.log("Adding post!");
         return $http.post('http://localhost:3000/api/v1/posts', {
           title: newPost.title,
           author: newPost.author,
@@ -33,15 +31,21 @@
         })
         .then(function(response){
           posts.push(response.data);
-          // vm.posts.push(response.data);
         })
       }
-      
+
+
+      $scope.$watch(function(){
+        return $window.localStorage.getItem('name');
+      }, function(newValue){
+        $scope.vm.session = newValue;
+      }, true);
+
 
       function changeVotes (id, upOrDown){
-        // console.log('yay changevotes function in the factory!!!');
-        // console.log('id', id);
-        // console.log('upOrDown', upOrDown);
+        console.log('yay changevotes function in the factory!!!');
+        console.log('id', id);
+        console.log('upOrDown', upOrDown);
         var stuff = {id: id}
         if (upOrDown === 'up') {
           stuff.upOrDown = 1
