@@ -36,6 +36,7 @@
           // vm.posts.push(response.data);
         })
       }
+      
 
       function changeVotes (id, upOrDown){
         // console.log('yay changevotes function in the factory!!!');

@@ -57,4 +57,32 @@ router.post('/signup', function(req, res, next) {
   }
 });
 
+router.post('/login', (req, res, next) =>{
+  console.log('hit server B', req.body);
+    return knex('users')
+    .whereRaw('lower(email) = ?', req.body.email.toLowerCase())
+    .first()
+    .then(function (result) {
+      if (result) {
+        var validPassword = bcrypt.compareSync(req.body.password, result.password)
+        if (validPassword) {
+          console.log('this is the result from the knex call', result);
+          const user = result;
+          const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+          res.json({
+            id: user.id,
+            name: user.name,
+            token: token
+          })
+        }
+      } else {
+        res.status(422).json({
+          errors: ["Invalid email"]
+        })
+      }
+    })
+  // }
+
+})
+
 module.exports = router;

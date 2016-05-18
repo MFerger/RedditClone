@@ -35,6 +35,10 @@ function postingFunction () {
       item.showComment = !item.showComment;
     };
 
+    vm.newComment = function (item) {
+      item.newCommentVisible = !item.newCommentVisible;
+    }
+
      function changeVotes (item, upordown) {
       postsService.change(item, upordown);
       }
