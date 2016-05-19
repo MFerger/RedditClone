@@ -43,9 +43,6 @@
 
 
       function changeVotes (id, upOrDown){
-        console.log('yay changevotes function in the factory!!!');
-        console.log('id', id);
-        console.log('upOrDown', upOrDown);
         var stuff = {id: id}
         if (upOrDown === 'up') {
           stuff.upOrDown = 1

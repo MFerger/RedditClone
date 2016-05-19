@@ -12,11 +12,10 @@
     }
   }
 
-    controller.$inject = ['$scope', '$window']
+    controller.$inject = ['$scope', '$window', '$rootScope']
 
-  function controller ($scope, $window) {
-    // var vm = this;
-    // vm.session = $rootScope.session;
+  function controller ($scope, $window, $rootScope) {
+
     $scope.vm = {};
     $scope.vm.session = $window.localStorage.getItem('name');
 
@@ -25,6 +24,11 @@
     }, function(newValue){
       $scope.vm.session = newValue;
     }, true);
+
+    $scope.vm.sort = function(sorted) {
+      $rootScope.vm.sort = sorted;
+      return $rootScope.vm.sort;
+    };
 
   }
 

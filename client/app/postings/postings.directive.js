@@ -19,7 +19,7 @@ function postingFunction () {
     }
   }
 
-  function controller(postsService, $scope) {
+  function controller(postsService, $scope, $rootScope) {
     var vm = this;
     activate();
     vm.changeVotes = changeVotes;
@@ -37,6 +37,11 @@ function postingFunction () {
     vm.newComment = function (item) {
       item.newCommentVisible = !item.newCommentVisible;
     }
+    
+    vm.sort = $rootScope.vm.sort;
+    console.log($rootScope.vm.sort('hello'));
+    console.log(vm.sort);
+
 
      function changeVotes (item, upordown) {
       postsService.change(item, upordown);
