@@ -12,6 +12,26 @@
   angular.module('app', dependencies)
     .config(setupRoutes)
     .factory('authInterceptor', tokenChecker)
+    .run(function ($rootScope, $state, $window, $location) {
+      $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
+        if(toState.protected && !localStorage.getItem('token')) {
+          event.preventDefault();
+          $state.go('home')
+        }
+      });
+    })
+    .factory('authInterceptor', function ($location) {
+      return {
+        request: function (config) {
+          if (localStorage.getItem('token')) {
+              config.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+              return config
+            } else {
+              return config;
+            }
+        }
+      }
+    })
 
   setupRoutes.$inject = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider'];
   function setupRoutes($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider){
