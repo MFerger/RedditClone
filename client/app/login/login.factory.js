@@ -13,7 +13,6 @@
     };
 
     function loginUser(data) {
-      console.log('it got to the log in user function in the factory', data);
       return $http.post('http://localhost:3000/users/login', data)
       .then(function (response) {
         $window.localStorage.setItem('token', response.data.token);

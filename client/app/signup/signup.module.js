@@ -22,7 +22,6 @@
       newUser.add(user)
       .then(function() {
         vm.user = {};
-        // console.log(")))))",vm.user);
       });
     }
   }

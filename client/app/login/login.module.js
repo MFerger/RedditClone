@@ -19,7 +19,6 @@ function loginController(currentUserFactory) {
   vm.loginUser = loginUser;
 
   function loginUser(post) {
-    console.log('it got here bitches');
     currentUserFactory.login(post)
     .then(function() {
       vm.post = {};

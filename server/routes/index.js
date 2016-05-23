@@ -60,15 +60,12 @@ router.post('/votes', (req, res, next) =>{
 //
 //
 // router.post('/votes', (req, res, next) => {
-//   console.log('wooooo it got to the votes in the router');
-//   console.log(req.body);
 //   var post_id = req.body.id;
 //   var changeVoteVal = (
 //     req.body.upOrDown === 1
 //       ? 'votes + 1'
 //       : 'votes - 1'
 //   )
-//   console.log(changeVoteVal);
 //   knex('posts')
 //     .where({id: post_id}).first()
 //     .update('votes', knex.raw(changeVoteVal))

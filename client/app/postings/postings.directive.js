@@ -37,11 +37,8 @@ function postingFunction () {
     vm.newComment = function (item) {
       item.newCommentVisible = !item.newCommentVisible;
     }
-    
-    vm.sort = $rootScope.vm.sort;
-    console.log($rootScope.vm.sort('hello'));
-    console.log(vm.sort);
 
+    vm.sort = $rootScope.vm.sort;
 
      function changeVotes (item, upordown) {
       postsService.change(item, upordown);

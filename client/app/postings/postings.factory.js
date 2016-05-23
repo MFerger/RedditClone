@@ -48,14 +48,14 @@
           stuff.upOrDown = 1
           return $http.post('http://localhost:3000/api/v1/votes', stuff)
             .then(function (data) {
-              console.log(data);
+              console.log('This has to be here');
             })
         }
         if (upOrDown === 'down') {
           stuff.upOrDown = -1
           return $http.post('http://localhost:3000/api/v1/votes', stuff)
           .then(function (data) {
-            console.log(data);
+            console.log('This has to be here');
           })
         }
       }
