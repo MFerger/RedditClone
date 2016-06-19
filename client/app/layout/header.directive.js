@@ -12,23 +12,37 @@
     }
   }
 
-    controller.$inject = ['$scope', '$window', '$rootScope']
+    controller.$inject = ['$scope', '$window', 'headerFactory']
 
-  function controller ($scope, $window, $rootScope) {
+  function controller ($scope, $window, headerFactory) {
 
     $scope.vm = {};
     $scope.vm.session = $window.localStorage.getItem('name');
-
+    $scope.vm.sort = '-votes';
+    $scope.vm.searchValue = '';
+    
     $scope.$watch(function(){
       return $window.localStorage.getItem('name');
     }, function(newValue){
       $scope.vm.session = newValue;
     }, true);
 
-    $scope.vm.sort = function(sorted) {
-      $rootScope.vm.sort = sorted;
-      return $rootScope.vm.sort;
+
+    $scope.vm.sortIt = function(sorted) {
+      $scope.vm.sort = sorted;
     };
+
+    $scope.$watch(function(){
+      return $scope.vm.sort;
+    }, function(newValue){
+      headerFactory.sortSet(newValue);
+    }, true);
+
+    $scope.$watch(function(){
+      return $scope.vm.searchValue;
+    }, function(newValue){
+      headerFactory.searchSet(newValue);
+    }, true);
 
   }
 

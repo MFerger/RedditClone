@@ -21,7 +21,7 @@ exports.seed = function(knex, Promise) {
       user_id: 3,
       description: 'here is a cool description from user 3 to post 3',
       title: 'Tel Aviv',
-      img_url: 'http://www.planwallpaper.com/static/images/beautiful-sunset-images-196063.jpg', author: 'Fichael Merger', votes: 4, showComment: false, newCommentVisible: false, date: '20160414 10:34:09 AM'}),
+      img_url: 'http://www.mugraby-hostel.com/wp-content/uploads/2010/01/Telaviv-City-Beach.jpg', author: 'Fichael Merger', votes: 4, showComment: false, newCommentVisible: false, date: '20160414 10:34:09 AM'}),
     knex('posts').insert({
       user_id: 4,
       description: 'here is a cool description from user 4 to post 4',

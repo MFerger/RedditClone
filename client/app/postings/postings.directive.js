@@ -3,52 +3,69 @@
 
 
   angular.module('app.postings')
-      .directive('postings', postingFunction);
+  .directive('postings', postingFunction);
 
-function postingFunction () {
-  return {
+  function postingFunction() {
+    return {
       scope: {},
       templateUrl: '/app/postings/postings.html',
       controller: controller,
       controllerAs: 'vm',
-      link: function (item) {
-        item.$on('showSingleComment', function (event, data) {
+      link: function(item) {
+        item.$on('showSingleComment', function(event, data) {
           item.showComment = data;
         })
       }
     }
   }
 
-  function controller(postsService, $scope, $rootScope) {
-    var vm = this;
+  function controller(postsService, $scope, headerFactory) {
+    $scope.vm = {};
     activate();
-    vm.changeVotes = changeVotes;
+    $scope.vm.changeVotes = changeVotes;
+    $scope.vm.sortValue = '-votes';
+    $scope.vm.searchValue = '';
 
-    $scope.$watch('vm.showComment', function (data) {
-        $scope.$broadcast('showSingleComment', data)
-      });
+    $scope.vm.showComment = false;
 
-    vm.showComment = false;
-
-    vm.showComments = function (item) {
+    $scope.vm.showComments = function(item) {
       item.showComment = !item.showComment;
     };
 
-    vm.newComment = function (item) {
+    $scope.vm.newComment = function(item) {
       item.newCommentVisible = !item.newCommentVisible;
     }
+    $scope.vm.addComment = function (item, value, position) {
+      console.log('addComment', item,value,position);
+      postsService.comment(item, value.text);
+    }
 
-    vm.sort = $rootScope.vm.sort;
+    function changeVotes(item, upordown) {
+      postsService.change(item, upordown).then(function(result) {
+        $scope.vm.serverData.posts = result;
+      });
+    }
 
-     function changeVotes (item, upordown) {
-      postsService.change(item, upordown);
-      }
-
-    function activate () {
-      postsService.list().then(function(data){
-        vm.serverData = data;
+    function activate() {
+      postsService.list().then(function(data) {
+        $scope.vm.serverData = data;
       })
     }
+
+    $scope.$watch(function() {
+      return headerFactory.sortGet();
+    }, function(newValue) {
+      $scope.vm.sortValue = newValue;
+    }, true);
+
+    $scope.$watch(function() {
+      return headerFactory.searchGet();
+    }, function(newValue) {
+      $scope.vm.searchValue = newValue;
+    }, true);
+
+
+
   }
 
 

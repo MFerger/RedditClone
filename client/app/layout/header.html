@@ -22,15 +22,15 @@
           <ul class="dropdown-menu">
             <li><a ui-sref="newUser">Sign up!</a></li>
             <li><a ui-sref="loginUser">Log In</a></li>
-            <li ng-click="vm.sort('-votes')"><a href="#">Votes</a></li>
-            <li ng-click="vm.sort('-date')"><a href="#">Newest Date</a></li>
-            <li ng-click="vm.sort('title')"><a href="#">Title</a></li>
+            <li ng-click="vm.sortIt('-votes')"><a href="#">Votes</a></li>
+            <li ng-click="vm.sortIt('-date')"><a href="#">Newest Date</a></li>
+            <li ng-click="vm.sortIt('title')"><a href="#">Title</a></li>
           </ul>
         </li>
       </ul>
       <form class="navbar-form navbar-center" role="search">
         <div class="form-group">
-          <input type="text" class="form-control" ng-model="search" placeholder="Search">
+          <input type="text" class="form-control" ng-model="vm.searchValue" placeholder="Search">
         </div>
       </form>
     </div>

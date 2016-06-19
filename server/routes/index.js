@@ -45,34 +45,47 @@ router.post('/votes', (req, res, next) =>{
   const changeVoteVal = (
     upOrDown === 1 ? 'votes + 1' : 'votes - 1'
   );
+  let results = {};
+
   knex('posts')
   .where( {id: post_id} ).first()
   .update('votes', knex.raw(changeVoteVal))
   .returning('*')
   .then( votes => {
-    res.json(votes[0])
+    knex('posts').then(posts => {
+      results.posts = posts;
+    }).then(function () {
+      knex('comments')
+         .then(function(comments) {
+             results.comments = comments;
+             for (var i = 0; i < results.posts.length; i++) {
+               results.posts[i].comments = [];
+               for (var j = 0; j < results.comments.length; j++) {
+                 if (results.posts[i].id === results.comments[j].post_id) results.posts[i].comments.push(results.comments[j])
+               }
+             }
+             delete results.comments;
+             res.json(results);
+         })
+    })
   })
   .catch( err => {
     res.send( {err} )
   });
 });
 
-//
-//
-// router.post('/votes', (req, res, next) => {
-//   var post_id = req.body.id;
-//   var changeVoteVal = (
-//     req.body.upOrDown === 1
-//       ? 'votes + 1'
-//       : 'votes - 1'
-//   )
-//   knex('posts')
-//     .where({id: post_id}).first()
-//     .update('votes', knex.raw(changeVoteVal))
-//     .then(votes =>{})
-//     .catch(err =>{
-//       res.send({err})
-//     });
-// });
+router.post('/comments', function(req, res, next) {
+  knex('comments')
+  .insert({
+    user_id: req.body.user_id,
+    post_id: req.body.id,
+    content: req.body.content
+  })
+  .then(function(comments){
+    console.log(comments);
+    res.end();
+  })
+
+});
 
 module.exports = router;

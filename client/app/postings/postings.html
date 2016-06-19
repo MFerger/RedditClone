@@ -1,4 +1,4 @@
-<section class='well' ng-repeat='item in vm.serverData.posts| filter: search | orderBy: vm.sort()'>
+<section class='well' ng-repeat="item in vm.serverData.posts | filter: vm.searchValue | orderBy: vm.sortValue">
   <article class='posts post'>
     <div class="row">
       <div class="col-md-12">
@@ -33,10 +33,11 @@
             </div>
             </span>
             <div class="comment" ng-show="item.newCommentVisible">
-              <form class="form-inline" ng-submit="addComment(item, newComment[$index], $index)">
+              {{vm.addComment}}
+              <form class="form-inline" ng-submit="vm.addComment(item, vm.newCommentObj[$index], $index)">
                 <div class="form-group">
                   <label>Text</label>
-                  <input type="text" placeholder="text" class="form-control" ng-model="newComment[$index].text">
+                  <input type="text" placeholder="text" class="form-control" ng-model="vm.newCommentObj[$index].text">
                 </div>
                 <input class="btn btn-primary" type="submit" value="Add Comment">
               </form>

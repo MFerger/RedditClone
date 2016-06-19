@@ -42,6 +42,21 @@
       .state('app', {
         url: "/",
         template: "<app></app>",
+        resolve: {
+          currentUser: function ($http, $location) {
+            return $http.get('http://localhost:3000/users/me')
+            .then(function (response) {
+        console.log('CURRENT USER:', response.data)
+        return response.data
+      })
+      .catch(function (error) {
+        console.log('Error: ', error)
+        localStorage.clear();
+        $location.path('/');
+        return null;
+      })
+  }
+}
       })
       $httpProvider.interceptors.push('authInterceptor')
   }
@@ -63,7 +78,6 @@
             return response;
           }
         }
-
     }
 
 }());
