@@ -3,7 +3,7 @@
 
   angular.module('app.postings')
   .factory('postsService', factory);
-  function factory($http) {
+  function factory($http, $window) {
     var factory = this;
     listPosts();
 
@@ -30,7 +30,7 @@
     function addPost(newPost) {
       return $http.post('http://localhost:3000/api/v1/posts', {
         title: newPost.title,
-        author: newPost.author,
+        author: $window.localStorage.getItem('name'),
         img_url: newPost.img_url,
         description: newPost.description
       })
@@ -40,9 +40,8 @@
     }
 
     function addComment(content, comment, userID) {
-      console.log('content', comment);
       return $http.post('http://localhost:3000/api/v1/comments', {
-         user_id: content.user_id,
+         user_id: +$window.localStorage.getItem('id'),
          post_id: content.id,
          content: comment
        })

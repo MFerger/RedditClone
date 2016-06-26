@@ -22,30 +22,30 @@
               <h4 class='author'>Author: {{item.author}}</h4>
               <p>
                 <span><strong>Posted: </strong></span>
-                <timeless time='item.date'></timeless>
+                <time title="{{ item.date | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}">{{ item.date | amCalendar }}</time>
               </p>
 
               <h4><span class="glyphicon glyphicon-comment" aria-hidden="true" ng-click='vm.showComments(item)'> </span> <strong><ng-pluralize count="item.comments.length" when="{1: ' 1 comment', 'other': ' {{ item.comments.length }} comments'}"></ng-pluralize></strong><span> | </span> <span class="glyphicon glyphicon-pencil" aria-hidden="true" ng-click='vm.newComment(item)'></span> <strong>Add a Comment</strong></h4>
               <span ng-show="item.showComment" ng-repeat="comment in item.comments">
-              <div class="col-md-12">
-                <h5 class='comment' ><span><strong>{{comment.user_id}} - </strong></span>
-              <span>{{comment.content}}</span></h5>
-            </div>
-            </span>
-            <div class="comment" ng-show="item.newCommentVisible">
-              {{vm.addComment}}
-              <form class="form-inline" ng-submit="vm.addComment(item, vm.newCommentObj[$index], $index)">
-                <div class="form-group">
-                  <label>Text</label>
-                  <input type="text" placeholder="text" class="form-control" ng-model="vm.newCommentObj[$index].text">
+                <div class="col-md-12">
+                  <h5 class='comment' ><span><strong>{{comment.user_id}} - </strong></span>
+                    <span>{{comment.content}}</span></h5>
+                  </div>
+                </span>
+                <div class="comment" ng-show="item.newCommentVisible">
+                  {{vm.addComment}}
+                  <form class="form-inline" ng-submit="vm.addComment(item, vm.newCommentObj[$index], $index)">
+                    <div class="form-group">
+                      <label>Text</label>
+                      <input type="text" placeholder="text" class="form-control" ng-model="vm.newCommentObj[$index].text">
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Add Comment">
+                  </form>
                 </div>
-                <input class="btn btn-primary" type="submit" value="Add Comment">
-              </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    </div>
-  </article>
-</section>
+    </article>
+  </section>

@@ -16,7 +16,8 @@
       return $http.post('http://localhost:3000/users/login', data)
       .then(function (response) {
         $window.localStorage.setItem('token', response.data.token);
-        $window.localStorage.setItem('name', response.data.name)
+        $window.localStorage.setItem('name', response.data.name);
+        $window.localStorage.setItem('id', response.data.id);
           $location.path('/');
       })
     }

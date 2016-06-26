@@ -6,7 +6,8 @@
     'app.postings',
     'app.newPost',
     'app.newUser',
-    'app.currentUser'
+    'app.currentUser',
+    'angularMoment'
   ];
 
   angular.module('app', dependencies)

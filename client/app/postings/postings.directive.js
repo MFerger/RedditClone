@@ -36,7 +36,6 @@
       item.newCommentVisible = !item.newCommentVisible;
     }
     $scope.vm.addComment = function (item, value, position) {
-      console.log('addComment', item,value,position);
       postsService.comment(item, value.text);
     }
 
